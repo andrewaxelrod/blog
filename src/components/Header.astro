@@ -1,0 +1,222 @@
+---
+import IconX from "@/assets/icons/IconX.svg";
+import IconMoon from "@/assets/icons/IconMoon.svg";
+import IconSearch from "@/assets/icons/IconSearch.svg";
+import IconArchive from "@/assets/icons/IconArchive.svg";
+import IconSunHigh from "@/assets/icons/IconSunHigh.svg";
+import IconMenuDeep from "@/assets/icons/IconMenuDeep.svg";
+import LinkButton from "./LinkButton.astro";
+import { SITE } from "@/config";
+
+const { pathname } = Astro.url;
+
+const currentPath =
+  pathname.endsWith("/") && pathname !== "/" ? pathname.slice(0, -1) : pathname;
+
+const isActive = (path: string) => {
+  const currentPathArray = currentPath.split("/").filter(p => p.trim());
+  const pathArray = path.split("/").filter(p => p.trim());
+  return currentPath === path || currentPathArray[0] === pathArray[0];
+};
+---
+
+<a
+  id="skip-to-content"
+  href="#main-content"
+  class="absolute start-16 -top-full z-50 bg-background px-3 py-2 text-accent backdrop-blur-lg transition-all focus:top-4"
+>
+  Skip to content
+</a>
+
+<header class="sticky top-0 z-40 w-full border-b border-border bg-background">
+  <div class="app-layout flex h-12 items-center justify-between">
+    <a
+      href="/"
+      class="text-sm font-semibold tracking-tight text-foreground hover:text-accent"
+    >
+      {SITE.title}
+    </a>
+
+    <nav
+      id="nav-menu"
+      class="flex items-center gap-1"
+    >
+      <button
+        id="menu-btn"
+        class="focus-outline p-2 sm:hidden"
+        aria-label="Open Menu"
+        aria-expanded="false"
+        aria-controls="menu-items"
+      >
+        <IconX id="close-icon" class="hidden size-5" />
+        <IconMenuDeep id="menu-icon" class="size-5" />
+      </button>
+
+      <ul
+        id="menu-items"
+        class:list={[
+          "hidden",
+          "sm:flex sm:items-center sm:gap-1",
+        ]}
+      >
+        <li>
+          <a
+            href="/posts"
+            class:list={[
+              "inline-block px-3 py-2 text-sm text-foreground/70 hover:text-foreground transition-colors",
+              { "active-nav !text-foreground": isActive("/posts") },
+            ]}
+          >
+            Posts
+          </a>
+        </li>
+        <li>
+          <a
+            href="/tags"
+            class:list={[
+              "inline-block px-3 py-2 text-sm text-foreground/70 hover:text-foreground transition-colors",
+              { "active-nav !text-foreground": isActive("/tags") },
+            ]}
+          >
+            Tags
+          </a>
+        </li>
+        <li>
+          <a
+            href="/about"
+            class:list={[
+              "inline-block px-3 py-2 text-sm text-foreground/70 hover:text-foreground transition-colors",
+              { "active-nav !text-foreground": isActive("/about") },
+            ]}
+          >
+            About
+          </a>
+        </li>
+        {
+          SITE.showArchives && (
+            <li>
+              <LinkButton
+                href="/archives"
+                class:list={[
+                  "focus-outline flex items-center p-2 text-foreground/70 hover:text-foreground",
+                  { "!text-foreground": isActive("/archives") },
+                ]}
+                title="Archives"
+                aria-label="archives"
+              >
+                <IconArchive class="size-4" />
+              </LinkButton>
+            </li>
+          )
+        }
+        <li class="flex items-center">
+          <LinkButton
+            href="/search"
+            class:list={[
+              "focus-outline flex items-center p-2 text-foreground/70 hover:text-foreground",
+              { "!text-foreground": isActive("/search") },
+            ]}
+            title="Search"
+            aria-label="search"
+          >
+            <IconSearch class="size-4" />
+            <span class="sr-only">Search</span>
+          </LinkButton>
+        </li>
+        {
+          SITE.lightAndDarkMode && (
+            <li class="flex items-center">
+              <button
+                id="theme-btn"
+                class="focus-outline relative size-8 p-2 text-foreground/70 hover:text-foreground"
+                title="Toggles light & dark"
+                aria-label="auto"
+                aria-live="polite"
+              >
+                <IconMoon class="absolute top-[50%] left-[50%] size-4 -translate-[50%] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                <IconSunHigh class="absolute top-[50%] left-[50%] size-4 -translate-[50%] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+              </button>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Mobile menu dropdown -->
+  <div id="mobile-menu" class="hidden border-t border-border bg-background sm:hidden">
+    <ul class="app-layout flex flex-col py-2">
+      <li>
+        <a
+          href="/posts"
+          class:list={[
+            "block px-2 py-2 text-sm text-foreground/70 hover:text-foreground",
+            { "font-semibold !text-foreground": isActive("/posts") },
+          ]}
+        >
+          Posts
+        </a>
+      </li>
+      <li>
+        <a
+          href="/tags"
+          class:list={[
+            "block px-2 py-2 text-sm text-foreground/70 hover:text-foreground",
+            { "font-semibold !text-foreground": isActive("/tags") },
+          ]}
+        >
+          Tags
+        </a>
+      </li>
+      <li>
+        <a
+          href="/about"
+          class:list={[
+            "block px-2 py-2 text-sm text-foreground/70 hover:text-foreground",
+            { "font-semibold !text-foreground": isActive("/about") },
+          ]}
+        >
+          About
+        </a>
+      </li>
+      {
+        SITE.showArchives && (
+          <li>
+            <a
+              href="/archives"
+              class:list={[
+                "block px-2 py-2 text-sm text-foreground/70 hover:text-foreground",
+                { "font-semibold !text-foreground": isActive("/archives") },
+              ]}
+            >
+              Archives
+            </a>
+          </li>
+        )
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  function toggleNav() {
+    const menuBtn = document.querySelector("#menu-btn");
+    const mobileMenu = document.querySelector("#mobile-menu");
+    const menuIcon = document.querySelector("#menu-icon");
+    const closeIcon = document.querySelector("#close-icon");
+
+    if (!menuBtn || !mobileMenu || !menuIcon || !closeIcon) return;
+
+    menuBtn.addEventListener("click", () => {
+      const open = menuBtn.getAttribute("aria-expanded") === "true";
+      menuBtn.setAttribute("aria-expanded", open ? "false" : "true");
+      menuBtn.setAttribute("aria-label", open ? "Open Menu" : "Close Menu");
+      mobileMenu.classList.toggle("hidden");
+      menuIcon.classList.toggle("hidden");
+      closeIcon.classList.toggle("hidden");
+    });
+  }
+
+  toggleNav();
+  document.addEventListener("astro:after-swap", toggleNav);
+</script>

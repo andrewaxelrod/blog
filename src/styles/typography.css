@@ -1,0 +1,138 @@
+@plugin "@tailwindcss/typography";
+
+@layer base {
+  /* ===== Override default Tailwind Typography styles ===== */
+  .app-prose {
+    @apply prose max-w-none;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    th {
+      @apply text-foreground font-semibold;
+    }
+
+    h2 {
+      @apply mt-8 mb-3 text-xl border-b border-border pb-2;
+    }
+
+    h3 {
+      @apply mt-6 mb-2 text-base;
+    }
+
+    p,
+    strong,
+    ol,
+    ul,
+    figcaption,
+    table {
+      @apply text-foreground;
+    }
+
+    a {
+      @apply no-underline hover:underline underline-offset-4;
+      color: var(--link);
+      text-decoration-color: color-mix(in srgb, var(--link) 50%, transparent);
+    }
+
+    ul {
+      @apply overflow-x-clip;
+    }
+
+    li {
+      @apply marker:text-foreground/40;
+    }
+
+    hr {
+      @apply border-border;
+    }
+
+    img {
+      @apply mx-auto rounded border border-border;
+    }
+
+    figcaption {
+      @apply text-center text-xs text-foreground/50;
+    }
+
+    table {
+      @apply text-sm;
+
+      th,
+      td {
+        @apply border border-border px-3 py-2 text-left;
+      }
+
+      th {
+        @apply bg-muted font-semibold;
+      }
+
+      tr:nth-child(even) td {
+        @apply bg-muted/50;
+      }
+    }
+
+    /* Inline code */
+    code {
+      @apply rounded bg-muted px-1.5 py-0.5 text-[0.85em] font-medium text-foreground before:content-none after:content-none;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+
+    .astro-code code {
+      @apply flex-[1_0_100%] bg-inherit p-0;
+    }
+
+    blockquote {
+      @apply border-s-2 border-border/60 text-foreground/70 not-italic;
+    }
+
+    details {
+      @apply inline-block cursor-pointer text-foreground select-none [&_p]:hidden [&_ul]:my-0!;
+    }
+
+    summary {
+      @apply focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent focus-visible:outline-dashed;
+    }
+
+    pre {
+      @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
+    }
+  }
+
+  /* ===== Code Blocks & Syntax Highlighting ===== */
+  .astro-code {
+    @apply flex rounded border border-border text-sm;
+    background-color: var(--shiki-light-bg) !important;
+    color: var(--shiki-light) !important;
+  }
+
+  .astro-code span {
+    color: var(--shiki-light) !important;
+  }
+
+  html[data-theme="dark"] .astro-code {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
+  }
+
+  html[data-theme="dark"] .astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+
+  /* Shiki transformers */
+  .astro-code {
+    .line.diff.add {
+      @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
+    }
+    .line.diff.remove {
+      @apply relative inline-block w-full bg-red-500/20 before:absolute before:-left-3 before:text-red-500 before:content-['-'];
+    }
+    .line.highlighted {
+      @apply inline-block w-full bg-slate-400/20;
+    }
+    .highlighted-word {
+      @apply rounded-sm border border-border px-0.5 py-px;
+    }
+  }
+}

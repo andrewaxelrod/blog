@@ -1,5 +1,9 @@
-declare module "@pagefind/default-ui" {
-	declare class PagefindUI {
-		constructor(arg: unknown);
-	}
+interface Window {
+  theme?: {
+    themeValue: string;
+    setPreference: () => void;
+    reflectPreference: () => void;
+    getTheme: () => string;
+    setTheme: (val: string) => void;
+  };
 }

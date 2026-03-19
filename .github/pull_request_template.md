@@ -1,21 +1,30 @@
-<!-- Thank you for opening a PR and making this theme even better, I appreciate you taking the time to help out 🙌 -->
+## Description
 
-#### What kind of changes does this PR include?
+<!-- A clear and concise description of what the pull request does. Include any relevant motivation and background. -->
 
-<!-- Delete any that don’t apply -->
+## Types of changes
 
-- Minor fixes (broken links, typos, css, etc.)
-- Changes with larger consequences (logic, library updates, etc.)
-- Something else!
+<!-- What types of changes does your code introduce to AstroPaper? Put an `x` in the boxes that apply -->
 
-#### Description
+- [ ] Bug Fix (non-breaking change which fixes an issue)
+- [ ] New Feature (non-breaking change which adds functionality)
+- [ ] Documentation Update (if none of the other choices apply)
+- [ ] Others (any other types not listed above)
 
-- Closes # <!-- Add an issue number if this PR will close it. -->
-- What does this PR change? A brief description would be great.
-- Did you change something visual? A before/after screenshot can be helpful.
+## Checklist
 
-<!--
-Here’s what will happen next:
-Hopefully I'll get time soon after your pull request to take a look and may ask you to make changes.
-I'll try to be responsive, but don’t worry if this takes a week or 2.
--->
+<!-- Please follow this checklist and put an x in each of the boxes, like this: [x]. You can also fill these out after creating the PR. This is simply a reminder of what we are going to look for before merging your code. -->
+
+- [ ] I have read the [Contributing Guide](https://github.com/satnaing/astro-paper/blob/main/.github/CONTRIBUTING.md)
+- [ ] I have added the necessary documentation (if appropriate)
+- [ ] Breaking Change (fix or feature that would cause existing functionality to not work as expected)
+
+## Further comments
+
+<!-- If this is a relatively large or complex change, kick off the discussion by explaining why you chose the solution you did and what alternatives you considered, etc... -->
+
+## Related Issue
+
+<!-- If this PR is related to an existing issue, link to it here. -->
+
+Closes: #<!-- Issue number, if applicable -->

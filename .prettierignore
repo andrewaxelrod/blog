@@ -1,8 +1,14 @@
-*.min.js
-node_modules
+# Ignore everything
+/*
 
-# cache-dirs
-**/.cache
-
-pnpm-lock.yaml
-dist
+# Except these files & folders
+!/src
+!/public
+!/.github
+!tsconfig.json
+!astro.config.ts
+!.prettierrc.mjs
+!package.json
+!.prettierrc
+!eslint.config.js
+!README.md

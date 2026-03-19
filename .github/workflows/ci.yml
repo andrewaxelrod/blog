@@ -1,42 +1,50 @@
-name: ci
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+name: CI
 
 permissions:
   contents: read
 
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+  workflow_call:
+
 jobs:
-  lint:
-    name: Check for build and type issues
+  build:
+    name: Code standards & build
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    strategy:
+      matrix:
+        node-version: [20]
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v6
+      - name: "☁️ Checkout repository"
+        uses: actions/checkout@v4
 
-      - name: Install pnpm
+      - name: "📦 Install pnpm"
         uses: pnpm/action-setup@v4
         with:
-          version: 10
-          run_install: false
+          version: 10.11.1
 
-      - name: Setup node
-        uses: actions/setup-node@v6
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node-version }}
           cache: "pnpm"
 
-      - name: Install dependencies
+      - name: "📦 Install dependencies"
         run: pnpm install
 
-        # use astro check for issues
-      - name: Run Astro check
-        run: pnpm astro check
+      - name: "🔎 Lint code"
+        run: pnpm run lint
 
-        # ensure build works
-      - name: Run Astro build
-        run: pnpm build
+      - name: "📝 Checking code format"
+        run: pnpm run format:check
+
+      - name: "🚀 Build the project"
+        run: pnpm run build
