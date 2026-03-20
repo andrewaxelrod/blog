@@ -67,7 +67,7 @@ html[data-theme="dark"] {
 /* Tab-style active nav — solid bottom border like Claude docs */
 .active-nav {
   @apply font-semibold;
-  border-bottom: 2px solid var(--foreground);
+  border-bottom: 2px solid var(--accent);
   padding-bottom: 2px;
 }
 
